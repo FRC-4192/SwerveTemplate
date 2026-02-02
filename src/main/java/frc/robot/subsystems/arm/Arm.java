@@ -18,8 +18,10 @@ import org.littletonrobotics.junction.AutoLogOutput;
 import org.littletonrobotics.junction.Logger;
 
 /**
- * The Arm subsystem controls a dual-motor arm mechanism for game piece manipulation. It supports
- * multiple positions for different game actions and provides both open-loop and closed-loop control
+ * The Arm subsystem controls a dual-motor arm mechanism for game piece
+ * manipulation. It supports
+ * multiple positions for different game actions and provides both open-loop and
+ * closed-loop control
  * options.
  */
 public class Arm extends SubsystemBase {
@@ -31,10 +33,8 @@ public class Arm extends SubsystemBase {
   private ArmMode currentMode = ArmMode.STOP;
 
   // Alerts for motor connection status
-  private final Alert leaderMotorAlert =
-      new Alert("Arm leader motor isn't connected", AlertType.kError);
-  private final Alert followerMotorAlert =
-      new Alert("Arm follower motor isn't connected", AlertType.kError);
+  private final Alert leaderMotorAlert = new Alert("Arm leader motor isn't connected", AlertType.kError);
+  private final Alert followerMotorAlert = new Alert("Arm follower motor isn't connected", AlertType.kError);
   private final Alert encoderAlert = new Alert("Arm encoder isn't connected", AlertType.kError);
 
   /**
@@ -69,7 +69,10 @@ public class Arm extends SubsystemBase {
     return inputs.encoderPosition;
   }
 
-  /** Enumeration of available arm positions with their corresponding target angles. */
+  /**
+   * Enumeration of available arm positions with their corresponding target
+   * angles.
+   */
   private enum ArmMode {
     STOP(Degrees.of(0)), // Stop the arm
     INTAKE(Degrees.of(0)), // Arm tucked in
@@ -125,7 +128,8 @@ public class Arm extends SubsystemBase {
    */
   @AutoLogOutput
   public boolean isAtTarget() {
-    if (currentMode == ArmMode.STOP) return true;
+    if (currentMode == ArmMode.STOP)
+      return true;
     return getPosition().isNear(currentMode.targetAngle, currentMode.angleTolerance);
   }
 
