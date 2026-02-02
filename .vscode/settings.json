@@ -1,5 +1,9 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
+<<<<<<< HEAD
+=======
+  "java.import.gradle.annotationProcessing.enabled": false,
+>>>>>>> 20a54d6f056297cd1e171bee4a447cda7c942e33
   "java.server.launchMode": "Standard",
   "files.exclude": {
     "**/.git": true,
@@ -18,6 +22,7 @@
     {
       "name": "WPIlibUnitTests",
       "workingDirectory": "${workspaceFolder}/build/jni/release",
+<<<<<<< HEAD
       "vmargs": [ "-Djava.library.path=${workspaceFolder}/build/jni/release" ],
       "env": {
         "LD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release" ,
@@ -58,4 +63,26 @@
     "edu.wpi.first.math.**.struct.*",
   ],
   "java.dependency.enableDependencyCheckup": false
+=======
+      "vmargs": [
+        "-Djava.library.path=${workspaceFolder}/build/jni/release"
+      ],
+      "env": {
+        "LD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release",
+        "DYLD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release"
+      }
+    }
+  ],
+  "java.test.defaultConfig": "WPIlibUnitTests",
+  "spotlessGradle.format.enable": true,
+  "spotlessGradle.diagnostics.enable": false,
+  "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+  "[json]": {
+    "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
+  },
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable"
+>>>>>>> 20a54d6f056297cd1e171bee4a447cda7c942e33
 }

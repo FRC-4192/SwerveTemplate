@@ -1,21 +1,41 @@
 {
+<<<<<<< HEAD
   // Use IntelliSense to learn about possible attributes.
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
 
+=======
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Flywheel",
+      "request": "launch",
+      "mainClass": "frc.robot.flywheel.Flywheel",
+      "projectName": "CTRE-AKit"
+    },
+>>>>>>> 20a54d6f056297cd1e171bee4a447cda7c942e33
     {
       "type": "wpilib",
       "name": "WPILib Desktop Debug",
       "request": "launch",
+<<<<<<< HEAD
       "desktop": true,
+=======
+      "desktop": true
+>>>>>>> 20a54d6f056297cd1e171bee4a447cda7c942e33
     },
     {
       "type": "wpilib",
       "name": "WPILib roboRIO Debug",
       "request": "launch",
+<<<<<<< HEAD
       "desktop": false,
+=======
+      "desktop": false
+>>>>>>> 20a54d6f056297cd1e171bee4a447cda7c942e33
     }
   ]
 }

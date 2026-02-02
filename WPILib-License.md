@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Copyright (c) 2009-2026 FIRST and other WPILib contributors
+=======
+Copyright (c) 2009-2025 FIRST and other WPILib contributors
+>>>>>>> 20a54d6f056297cd1e171bee4a447cda7c942e33
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
