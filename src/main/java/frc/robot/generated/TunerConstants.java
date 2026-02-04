@@ -77,7 +77,7 @@ public class TunerConstants {
 
     // Theoretical free speed (m/s) at 12 V applied output;
     // This needs to be tuned to your individual robot
-    public static final LinearVelocity kSpeedAt12Volts = MetersPerSecond.of(4.52);
+    public static final LinearVelocity kSpeedAt12Volts = MetersPerSecond.of(4.51);
 
     // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
     // This may need to be tuned to your individual robot
@@ -85,7 +85,7 @@ public class TunerConstants {
 
     private static final double kDriveGearRatio = 6.746031746031747;
     private static final double kSteerGearRatio = 12.8;
-    private static final Distance kWheelRadius = Inches.of(1.975);
+    private static final Distance kWheelRadius = Inches.of(1.97);
 
     private static final boolean kInvertLeftSide = false;
     private static final boolean kInvertRightSide = true;
@@ -130,7 +130,7 @@ public class TunerConstants {
     private static final int kFrontLeftDriveMotorId = 11;
     private static final int kFrontLeftSteerMotorId = 12;
     private static final int kFrontLeftEncoderId = 13;
-    private static final Angle kFrontLeftEncoderOffset = Rotations.of(0.0458984375);
+    private static final Angle kFrontLeftEncoderOffset = Rotations.of(0.0517578125);
     private static final boolean kFrontLeftSteerMotorInverted = false;
     private static final boolean kFrontLeftEncoderInverted = false;
 
@@ -141,7 +141,7 @@ public class TunerConstants {
     private static final int kFrontRightDriveMotorId = 17;
     private static final int kFrontRightSteerMotorId = 16;
     private static final int kFrontRightEncoderId = 18;
-    private static final Angle kFrontRightEncoderOffset = Rotations.of(0.273193359375);
+    private static final Angle kFrontRightEncoderOffset = Rotations.of(0.274169921875);
     private static final boolean kFrontRightSteerMotorInverted = false;
     private static final boolean kFrontRightEncoderInverted = false;
 
@@ -152,7 +152,7 @@ public class TunerConstants {
     private static final int kBackLeftDriveMotorId = 26;
     private static final int kBackLeftSteerMotorId = 27;
     private static final int kBackLeftEncoderId = 28;
-    private static final Angle kBackLeftEncoderOffset = Rotations.of(0.3251953125);
+    private static final Angle kBackLeftEncoderOffset = Rotations.of(0.324462890625);
     private static final boolean kBackLeftSteerMotorInverted = false;
     private static final boolean kBackLeftEncoderInverted = false;
 
@@ -163,7 +163,7 @@ public class TunerConstants {
     private static final int kBackRightDriveMotorId = 21;
     private static final int kBackRightSteerMotorId = 22;
     private static final int kBackRightEncoderId = 23;
-    private static final Angle kBackRightEncoderOffset = Rotations.of(0.07861328125);
+    private static final Angle kBackRightEncoderOffset = Rotations.of(0.08837890625);
     private static final boolean kBackRightSteerMotorInverted = false;
     private static final boolean kBackRightEncoderInverted = false;
 
@@ -267,12 +267,12 @@ public class TunerConstants {
          *                                  CAN FD, and 100 Hz on CAN 2.0.
          * @param odometryStandardDeviation The standard deviation for odometry
          *                                  calculation
-         *                                  in the form [x, y, theta]巢, with units in
+         *                                  in the form [x, y, theta]áµ€, with units in
          *                                  meters
          *                                  and radians
          * @param visionStandardDeviation   The standard deviation for vision
          *                                  calculation
-         *                                  in the form [x, y, theta]巢, with units in
+         *                                  in the form [x, y, theta]áµ€, with units in
          *                                  meters
          *                                  and radians
          * @param modules                   Constants for each specific module

@@ -4,11 +4,7 @@ pluginManagement {
     repositories {
         mavenLocal()
         gradlePluginPortal()
-<<<<<<< HEAD
         String frcYear = '2026'
-=======
-        String frcYear = '2025'
->>>>>>> 20a54d6f056297cd1e171bee4a447cda7c942e33
         File frcHome
         if (OperatingSystem.current().isWindows()) {
             String publicFolder = System.getenv('PUBLIC')
@@ -24,13 +20,8 @@ pluginManagement {
         }
         def frcHomeMaven = new File(frcHome, 'maven')
         maven {
-<<<<<<< HEAD
             name = 'frcHome'
             url = frcHomeMaven
-=======
-            name 'frcHome'
-            url frcHomeMaven
->>>>>>> 20a54d6f056297cd1e171bee4a447cda7c942e33
         }
     }
 }
