@@ -188,7 +188,7 @@ public class ElevatorIOCTRE implements ElevatorIO {
      * linear distance to
      * encoder rotations and applies position control.
      *
-     * @param distance The target distance for the elevator
+     * @param distance The target distance for the elevatorp
      */
     @Override
     public void setDistance(Distance distance) {

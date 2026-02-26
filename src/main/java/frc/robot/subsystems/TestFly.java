@@ -22,18 +22,26 @@ import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TestFly extends SubsystemBase {
-    private TalonFX take, take2;
+    private TalonFX take, take2, transfer;
     private double originalCurrent;
     private double filteredCurrent;
 
     public TestFly() {
         take = new TalonFX(30);
         take2 = new TalonFX(31);
+        transfer = new TalonFX(32);
 
         TalonFXConfiguration shooter = new TalonFXConfiguration()
                 .withCurrentLimits(new CurrentLimitsConfigs()
-                        .withSupplyCurrentLimit(40)
-                        .withStatorCurrentLimit(40))
+                        .withSupplyCurrentLimit(70)
+                        .withStatorCurrentLimit(70))
+                .withMotorOutput(new MotorOutputConfigs()
+                        .withInverted(InvertedValue.Clockwise_Positive)
+                        .withNeutralMode(NeutralModeValue.Coast));
+        TalonFXConfiguration tr = new TalonFXConfiguration()
+                .withCurrentLimits(new CurrentLimitsConfigs()
+                        .withSupplyCurrentLimit(25)
+                        .withStatorCurrentLimit(25))
                 .withMotorOutput(new MotorOutputConfigs()
                         .withInverted(InvertedValue.Clockwise_Positive)
                         .withNeutralMode(NeutralModeValue.Coast));
@@ -41,6 +49,9 @@ public class TestFly extends SubsystemBase {
         take.getConfigurator().apply(shooter);
         take2.getConfigurator().apply(shooter);
         take2.setControl(new Follower(30, MotorAlignmentValue.Opposed));
+
+        transfer.getConfigurator().apply(tr);
+
     }
 
     @Override
@@ -66,6 +77,7 @@ public class TestFly extends SubsystemBase {
 
     public void runTakeRaw(double power) {
         take.set(power);
+        transfer.set(power);
     }
 
     public Command runTakeOnce(double power) {

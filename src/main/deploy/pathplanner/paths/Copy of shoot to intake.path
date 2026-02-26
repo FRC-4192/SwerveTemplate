@@ -3,55 +3,59 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.782023391812864,
-        "y": 2.17856725146199
+        "x": 2.435497076023392,
+        "y": 7.136
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.474385964915833,
-        "y": 1.85501754386544
+        "x": 3.341857052598773,
+        "y": 7.635164734890502
       },
       "isLocked": false,
-      "linkedName": "intake"
+      "linkedName": "shoot 1"
     },
     {
       "anchor": {
-        "x": 5.761163742695212,
-        "y": 0.6350760233976018
+        "x": 5.039807017543859,
+        "y": 7.476
       },
       "prevControl": {
-        "x": 6.052651783370805,
-        "y": 0.6640866814750065
+        "x": 4.811705423446266,
+        "y": 7.578321370056
       },
       "nextControl": {
-        "x": 3.522836257309941,
-        "y": 0.41230409356725284
+        "x": 7.418597600925427,
+        "y": 6.408926740249896
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.435497076023392,
-        "y": 0.9639298245614043
+        "x": 7.782023391812864,
+        "y": 5.921
       },
       "prevControl": {
-        "x": 3.1939824561403505,
-        "y": 0.6244678362573108
+        "x": 7.598144959900249,
+        "y": 6.106433386154447
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "shoot"
+      "linkedName": "intake 1"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5196182396606529,
+      "waypointRelativePos": 0.4998232591021529,
       "rotationDegrees": 0.0
     },
     {
-      "waypointRelativePos": 1.4499823259102156,
+      "waypointRelativePos": 0.9367267585719327,
       "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 1.7030752916224658,
+      "rotationDegrees": -38.43286331942267
     }
   ],
   "constraintZones": [],
@@ -67,13 +71,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -116.00000000000001
+    "rotation": -54.088274134555164
   },
   "reversed": false,
-  "folder": "new folder",
+  "folder": "New Folder",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 45.0
+    "rotation": 123.03762691031402
   },
   "useDefaultConstraints": true
 }

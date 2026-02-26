@@ -3,6 +3,8 @@ package frc.robot;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -15,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.TestFly;
+import frc.robot.subsystems.TestIntake;
 // import frc.robot.subsystems.arm.Arm;
 // import frc.robot.subsystems.arm.ArmIO;
 // import frc.robot.subsystems.arm.ArmIOCTRE;
@@ -54,7 +57,8 @@ public class RobotContainer {
         // private final Elevator elevator;
         // private final Arm arm;
 
-        // private final TestFly fly;
+        private final TestFly fly;
+        private final TestIntake intake;
 
         /* Setting up bindings for necessary control of the swerve drive platform */
         private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
@@ -87,7 +91,9 @@ public class RobotContainer {
                                 // real robot
                                 // arm = new Arm(new ArmIO() {});
 
-                                // fly = new TestFly();
+                                fly = new TestFly();
+
+                                intake = new TestIntake();
 
                                 break;
 
@@ -129,7 +135,9 @@ public class RobotContainer {
                                 // flywheel = new Flywheel(new FlywheelIOSIM());
                                 // elevator = new Elevator(new ElevatorIOSIM());
                                 // arm = new Arm(new ArmIOSIM());
-                                // fly = new TestFly();
+                                fly = new TestFly();
+
+                                intake = new TestIntake();
 
                                 break;
 
@@ -152,7 +160,8 @@ public class RobotContainer {
                                 // flywheel = new Flywheel(new FlywheelIO() {});
                                 // elevator = new Elevator(new ElevatorIO() {});
                                 // arm = new Arm(new ArmIOCTRE() {});
-                                // fly = new TestFly();
+                                fly = new TestFly();
+                                intake = new TestIntake();
 
                                 break;
                 }
@@ -183,9 +192,19 @@ public class RobotContainer {
                 // Note that X is defined as forward according to WPILib convention,
                 // and Y is defined as to the left according to WPILib convention.
 
-                // fly.setDefaultCommand(
-                // fly.runTake(() -> joystick.getLeftTriggerAxis() -
-                // joystick.getRightTriggerAxis()));
+                joystick
+                                .rightBumper()
+                                .whileTrue(
+                                                intake.runIntake());
+
+                joystick
+                                .leftBumper()
+                                .whileTrue(
+                                                intake.runOuttake());
+
+                fly.setDefaultCommand(
+                                fly.runTake(() -> joystick.getLeftTriggerAxis() -
+                                                joystick.getRightTriggerAxis()));
 
                 drivetrain.setDefaultCommand(
                                 // Drivetrain will execute this command periodically

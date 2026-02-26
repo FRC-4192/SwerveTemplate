@@ -4,28 +4,28 @@
     {
       "anchor": {
         "x": 0.6294720252145123,
-        "y": 0.688
+        "y": 5.975508274235174
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.8658087162084296,
-        "y": 0.590349394408997
+        "x": 1.1802547905779142,
+        "y": 5.737683517183721
       },
       "isLocked": false,
-      "linkedName": "HP"
+      "linkedName": "Depot"
     },
     {
       "anchor": {
         "x": 2.435497076023392,
-        "y": 0.9639298245614043
+        "y": 7.136
       },
       "prevControl": {
-        "x": 2.1919484933491744,
-        "y": 0.907502101965327
+        "x": 2.1216884505128792,
+        "y": 7.040893521941565
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "shoot"
+      "linkedName": "shoot 1"
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -116.00000000000001
+    "rotation": 123.03762691031402
   },
   "reversed": false,
   "folder": "New Folder",
