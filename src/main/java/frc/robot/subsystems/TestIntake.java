@@ -63,8 +63,8 @@ public class TestIntake extends SubsystemBase {
         intake.set(power);
     }
 
-    public Command runIntakeOnce() {
-        return runOnce(() -> runIntakeRaw(power));
+    public Command runIntakeOnce(double power) {
+        return runOnce(() -> runIntakeRaw(power * .75));
     }
 
 }

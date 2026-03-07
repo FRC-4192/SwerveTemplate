@@ -17,7 +17,9 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.TestFly;
+import frc.robot.subsystems.TestHang;
 import frc.robot.subsystems.TestIntake;
+import frc.robot.subsystems.TestHopper;
 // import frc.robot.subsystems.arm.Arm;
 // import frc.robot.subsystems.arm.ArmIO;
 // import frc.robot.subsystems.arm.ArmIOCTRE;
@@ -42,8 +44,12 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 public class RobotContainer {
         private LinearVelocity MaxSpeed = TunerConstants.kSpeedAt12Volts;
+
         private final TunableController joystick = new TunableController(0)
                         .withControllerType(TunableControllerType.QUADRATIC);
+
+        private final TunableController joystick2 = new TunableController(1)
+                        .withControllerType(TunableControllerType.LINEAR);
 
         private final LoggedDashboardChooser<Command> autoChooser;
 
@@ -59,6 +65,8 @@ public class RobotContainer {
 
         private final TestFly fly;
         private final TestIntake intake;
+        private final TestHang hang;
+        private final TestHopper hopper;
 
         /* Setting up bindings for necessary control of the swerve drive platform */
         private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
@@ -94,6 +102,8 @@ public class RobotContainer {
                                 fly = new TestFly();
 
                                 intake = new TestIntake();
+                                hang = new TestHang();
+                                hopper = new TestHopper();
 
                                 break;
 
@@ -138,6 +148,8 @@ public class RobotContainer {
                                 fly = new TestFly();
 
                                 intake = new TestIntake();
+                                hang = new TestHang();
+                                hopper = new TestHopper();
 
                                 break;
 
@@ -162,6 +174,8 @@ public class RobotContainer {
                                 // arm = new Arm(new ArmIOCTRE() {});
                                 fly = new TestFly();
                                 intake = new TestIntake();
+                                hang = new TestHang();
+                                hopper = new TestHopper();
 
                                 break;
                 }
@@ -192,19 +206,31 @@ public class RobotContainer {
                 // Note that X is defined as forward according to WPILib convention,
                 // and Y is defined as to the left according to WPILib convention.
 
-                joystick
-                                .rightBumper()
-                                .whileTrue(
-                                                intake.runIntake());
+                // joystick2
+                // .rightBumper()
+                // .whileTrue(
+                // intake.runIntake())
+                // .whileFalse(intake.runIntakeOnce(0));
 
-                joystick
-                                .leftBumper()
-                                .whileTrue(
-                                                intake.runOuttake());
+                // joystick2
+                // .leftBumper()
+                // .whileTrue(
+                // intake.runOuttake())
+                // .whileFalse(intake.runIntakeOnce(0));
+
+                intake.runIntakeRaw(joystick2.getLeftTriggerAxis() -
+                                joystick2.getRightTriggerAxis());
+
+                // joystick2.a().whileTrue(hopper.runHopperOnce(joystick2.R));
+                hopper.setDefaultCommand(
+                                hopper.runTake(() -> joystick2.getRightY()));
 
                 fly.setDefaultCommand(
-                                fly.runTake(() -> joystick.getLeftTriggerAxis() -
-                                                joystick.getRightTriggerAxis()));
+                                fly.runTake(() -> joystick2.getLeftTriggerAxis() -
+                                                joystick2.getRightTriggerAxis()));
+
+                hang.setDefaultCommand(
+                                hang.runTake(() -> joystick2.getLeftY()));
 
                 drivetrain.setDefaultCommand(
                                 // Drivetrain will execute this command periodically

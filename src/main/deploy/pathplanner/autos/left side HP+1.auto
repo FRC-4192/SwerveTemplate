@@ -29,7 +29,10 @@
           }
         },
         {
-          "type": "path",
+          "type": "path",  public Command runIntakeOnce(double power) {
+        return runOnce(() -> runIntakeRaw(power));
+    }
+
           "data": {
             "pathName": "shoot to intake"
           }
