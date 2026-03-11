@@ -5,21 +5,26 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /**
- * A customizable Xbox controller that provides various input scaling options. This class extends
- * CommandXboxController to provide additional functionality for scaling joystick inputs using
+ * A customizable Xbox controller that provides various input scaling options.
+ * This class extends
+ * CommandXboxController to provide additional functionality for scaling
+ * joystick inputs using
  * different response curves.
  *
- * <p>The controller supports different input response types through the {@link
- * TunableControllerType} enum, allowing for LINEAR, QUADRATIC, and CUBIC response curves. This can
+ * <p>
+ * The controller supports different input response types through the {@link
+ * TunableControllerType} enum, allowing for LINEAR, QUADRATIC, and CUBIC
+ * response curves. This can
  * be useful for:
  *
  * <ul>
- *   <li>Fine control at low speeds (higher order curves)
- *   <li>Linear response for predictable input (linear curve)
- *   <li>Custom response curves for specific driving scenarios
+ * <li>Fine control at low speeds (higher order curves)
+ * <li>Linear response for predictable input (linear curve)
+ * <li>Custom response curves for specific driving scenarios
  * </ul>
  *
- * <p>Usage example:
+ * <p>
+ * Usage example:
  *
  * <pre>
  * TunableController controller = new TunableController(0)
@@ -36,7 +41,8 @@ public class TunableController extends CommandXboxController {
   /**
    * Constructs a new TunableController.
    *
-   * @param port The port index on the Driver Station (0-5) that the controller is plugged into.
+   * @param port The port index on the Driver Station (0-5) that the controller is
+   *             plugged into.
    */
   public TunableController(int port) {
     super(port);
@@ -45,8 +51,9 @@ public class TunableController extends CommandXboxController {
   /**
    * Gets the scaled input values from the left stick.
    *
-   * @return A Translation2d representing the scaled x and y values from the left stick. The
-   *     magnitude is guaranteed to be between 0 and 1.
+   * @return A Translation2d representing the scaled x and y values from the left
+   *         stick. The
+   *         magnitude is guaranteed to be between 0 and 1.
    */
   public Translation2d customLeft() {
     return getCustom(getLeftX(), getLeftY());
@@ -55,8 +62,9 @@ public class TunableController extends CommandXboxController {
   /**
    * Gets the scaled input values from the right stick.
    *
-   * @return A Translation2d representing the scaled x and y values from the right stick. The
-   *     magnitude is guaranteed to be between 0 and 1.
+   * @return A Translation2d representing the scaled x and y values from the right
+   *         stick. The
+   *         magnitude is guaranteed to be between 0 and 1.
    */
   public Translation2d customRight() {
     return getCustom(getRightX(), getRightY());
@@ -91,7 +99,8 @@ public class TunableController extends CommandXboxController {
   }
 
   /**
-   * Defines different types of input response curves. Each type provides a different relationship
+   * Defines different types of input response curves. Each type provides a
+   * different relationship
    * between input and output magnitudes while preserving the input direction.
    */
   public enum TunableControllerType {

@@ -43,7 +43,7 @@ public class TestFly extends SubsystemBase {
                         .withSupplyCurrentLimit(25)
                         .withStatorCurrentLimit(25))
                 .withMotorOutput(new MotorOutputConfigs()
-                        .withInverted(InvertedValue.Clockwise_Positive)
+                        .withInverted(InvertedValue.CounterClockwise_Positive)
                         .withNeutralMode(NeutralModeValue.Coast));
 
         take.getConfigurator().apply(shooter);

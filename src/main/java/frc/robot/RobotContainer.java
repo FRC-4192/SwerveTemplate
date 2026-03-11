@@ -10,8 +10,10 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.units.measure.LinearVelocity;
+import edu.wpi.first.wpilibj.PS5Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.DriveCommands;
@@ -45,11 +47,14 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
         private LinearVelocity MaxSpeed = TunerConstants.kSpeedAt12Volts;
 
-        private final TunableController joystick = new TunableController(0)
-                        .withControllerType(TunableControllerType.QUADRATIC);
+        // private final TunablePController joystick = new TunableController(0)
+        // .withControllerType(TunableControllerType.QUADRATIC);
 
-        private final TunableController joystick2 = new TunableController(1)
-                        .withControllerType(TunableControllerType.LINEAR);
+        // private final TunableController joystick2 = new TunableController(1)
+        // .withControllerType(TunableControllerType.LINEAR);
+
+        private final CommandPS5Controller joystick = new CommandPS5Controller(0);
+        private final CommandPS5Controller joystick2 = new CommandPS5Controller(1);
 
         private final LoggedDashboardChooser<Command> autoChooser;
 
@@ -199,38 +204,26 @@ public class RobotContainer {
                 autoChooser.addOption(
                                 "Drive Wheel Radius Characterization",
                                 DriveCommands.wheelRadiusCharacterization(drivetrain));
+                fly.setDefaultCommand(fly.runTakeOnce(0));
+                hopper.setDefaultCommand(
+                                hopper.runTake(() -> 0));
+                intake.setDefaultCommand(
+                                intake.runTake(() -> joystick.getL2Axis() -
+                                                joystick.getR2Axis()));
+
                 configureBindings();
         }
 
         private void configureBindings() {
-                // Note that X is defined as forward according to WPILib convention,
-                // and Y is defined as to the left according to WPILib convention.
 
-                // joystick2
-                // .rightBumper()
-                // .whileTrue(
-                // intake.runIntake())
-                // .whileFalse(intake.runIntakeOnce(0));
+                // hang.setDefaultCommand(
+                // hang.runTake(() -> joystick2.getLeftY()));
 
-                // joystick2
-                // .leftBumper()
-                // .whileTrue(
-                // intake.runOuttake())
-                // .whileFalse(intake.runIntakeOnce(0));
+                joystick.cross().toggleOnTrue(hopper.runTake(() -> -1).alongWith(fly.runTakeOnce(1)))
+                                .toggleOnFalse(hopper.runTake(() -> 0).alongWith(fly.runTakeOnce(0)));
 
-                intake.runIntakeRaw(joystick2.getLeftTriggerAxis() -
-                                joystick2.getRightTriggerAxis());
-
-                // joystick2.a().whileTrue(hopper.runHopperOnce(joystick2.R));
-                hopper.setDefaultCommand(
-                                hopper.runTake(() -> joystick2.getRightY()));
-
-                fly.setDefaultCommand(
-                                fly.runTake(() -> joystick2.getLeftTriggerAxis() -
-                                                joystick2.getRightTriggerAxis()));
-
-                hang.setDefaultCommand(
-                                hang.runTake(() -> joystick2.getLeftY()));
+                // joystick2.axisMagnitudeGreaterThan(PS5Controller.Axis.kLeftY.value,
+                // 0.01).onTrue(intake.runPivot(()-> joystick2.getLeftY()));
 
                 drivetrain.setDefaultCommand(
                                 // Drivetrain will execute this command periodically
@@ -239,37 +232,33 @@ public class RobotContainer {
                                                                 .withVelocityX(
                                                                                 MaxSpeed.times(
                                                                                                 joystick
-                                                                                                                .customLeft()
-                                                                                                                .getY())) // Drive
-                                                                                                                          // forward
-                                                                                                                          // with
-                                                                                                                          // negative
-                                                                                                                          // Y
-                                                                                                                          // (forward)
+                                                                                                                .getLeftY())) // Drive
+                                                                                                                              // forward
+                                                                                                                              // with
+                                                                                                                              // negative
+                                                                                                                              // Y
+                                                                                                                              // (forward)
                                                                 .withVelocityY(
                                                                                 MaxSpeed.times(
-                                                                                                joystick.customLeft()
-                                                                                                                .getX())) // Drive
-                                                                                                                          // left
-                                                                                                                          // with
-                                                                                                                          // negative
-                                                                                                                          // X
-                                                                                                                          // (left)
+                                                                                                joystick.getLeftX())) // Drive
+                                                                                                                      // left
+                                                                                                                      // with
+                                                                                                                      // negative
+                                                                                                                      // X
+                                                                                                                      // (left)
                                                                 .withRotationalRate(
                                                                                 Constants.MaxAngularRate.times(
                                                                                                 -joystick
-                                                                                                                .customRight()
-                                                                                                                .getX())))); // Drive
-                                                                                                                             // counterclockwise
-                                                                                                                             // with
-                                                                                                                             // negative
-                                                                                                                             // X
-                                                                                                                             // (left)
+                                                                                                                .getRightX())))); // Drive
+                                                                                                                                  // counterclockwise
+                                                                                                                                  // with
+                                                                                                                                  // negative
+                                                                                                                                  // X
+                                                                                                                                  // (left)
 
                 // joystick.a().onTrue(Commands.runOnce(() ->
                 // drivetrain.resetPose(Pose2d.kZero)));
-                joystick
-                                .b()
+                joystick.circle()
                                 .whileTrue(
                                                 drivetrain.applyRequest(
                                                                 () -> point.withModuleDirection(
@@ -286,7 +275,7 @@ public class RobotContainer {
                                 drivetrain::getRotation)
                                 .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
                 joystick
-                                .x()
+                                .square()
                                 .whileTrue(
                                                 drivetrain.applyRequest(
                                                                 () -> setpointGen
@@ -300,21 +289,6 @@ public class RobotContainer {
                                                                                 .withOperatorForwardDirection(drivetrain
                                                                                                 .getOperatorForwardDirection())));
 
-                // Run SysId routines when holding back/start and X/Y.
-                // Note that each routine should be run exactly once in a single log.
-                joystick.back().and(joystick.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-                joystick.back().and(joystick.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
-                joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-                joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
-
-                // reset the field-centric heading on left bumper press
-                // joystick.leftBumper().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
-                // joystick.a().onTrue(Commands.parallel(flywheel.L1(), arm.L1(),
-                // elevator.L1()));
-                // joystick.b().onTrue(Commands.parallel(flywheel.L2(), arm.L2(),
-                // elevator.L2()));
-                // joystick.x().onTrue(Commands.parallel(flywheel.stop(), arm.stop(),
-                // elevator.stop()));
         }
 
         public Command getAutonomousCommand() {
